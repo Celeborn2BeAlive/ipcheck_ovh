@@ -21,7 +21,6 @@ source credentials.sh
 #prevent error when ipcheck.err exists
 rm -f ipcheck.err
 
-#IP=12.13.14.15
 IP=`curl http://checkip.dyndns.org | sed -nre 's/^.* (([0-9]{1,3}\.){3}[0-9]{1,3}).*$/\1/p'`
 
 if [ -f "$PATH_FILE_OLD_IP" ]
