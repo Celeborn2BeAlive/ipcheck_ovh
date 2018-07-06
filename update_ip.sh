@@ -5,9 +5,9 @@
 #
 
 PATH_APP=$(dirname "$0")
-PATH_LOG=log
-PATH_IPCHECK=ipcheck.py
-PATH_FILE_OLD_IP=old_ip
+PATH_LOG=./log
+PATH_IPCHECK=./ipcheck.py
+PATH_FILE_OLD_IP=./old_ip
 
 #
 # CONFIG END
@@ -16,10 +16,10 @@ PATH_FILE_OLD_IP=old_ip
 cd $PATH_APP
 
 # credentials.sh must define the following variables
-source credentials.sh
+source ./credentials.sh
 
 #prevent error when ipcheck.err exists
-rm -f ipcheck.err
+rm -f ./ipcheck.err
 
 IP=`curl http://checkip.dyndns.org | sed -nre 's/^.* (([0-9]{1,3}\.){3}[0-9]{1,3}).*$/\1/p'`
 
