@@ -5,7 +5,6 @@
 #
 
 PATH_APP=$(dirname "$0")
-PATH_LOG=./log
 PATH_IPCHECK=./ipcheck.py
 PATH_FILE_OLD_IP=./old_ip
 
@@ -31,20 +30,19 @@ else
 fi
 
 if [ -z "$IP" ]; then
-    printf "$(date) - No IP retrieved\n" >> $PATH_LOG
+    echo "No IP retrieved"
 else
     if [ "$OLD_IP" != "$IP" ]; then
-        printf "$(date) - Current IP: $IP - Old IP: $OLD_IP - IP Changed - Update DynHost\n" >> $PATH_LOG
+        echo "Current IP: $IP - Old IP: $OLD_IP - IP Changed - Update DynHost"
         RESULT=`$PATH_IPCHECK -a $IP $LOGIN $PASSWORD $HOST`
         TMP=`echo $RESULT | grep 'successful'`
         if [ -z "$RESULT" ] || [ "$TMP" ]; then
-            printf "$(date) - Success\n" >> $PATH_LOG
-            printf "$IP" > $PATH_FILE_OLD_IP
+            echo "Success - $IP"
+            echo "$IP" > $PATH_FILE_OLD_IP
         else
-            printf "$(date) - Error: $RESULT\n" >> $PATH_LOG
+            echo "Error: $RESULT"
         fi
-        printf "\n" >> $PATH_LOG
     else
-        printf "$(date) - Current IP: $IP - Old IP: $OLD_IP - No IP Change\n" >> $PATH_LOG
+        echo "Current IP: $IP - Old IP: $OLD_IP - No IP Change"
     fi
 fi
